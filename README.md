@@ -2,10 +2,9 @@
 
 This is the complete source code and the build instructions for the official [Telegram][telegram] messenger desktop client, based on the [Telegram API][telegram_api] and the [MTProto][telegram_proto] secure protocol.
 
-[![Version](https://badge.fury.io/gh/telegramdesktop%2Ftdesktop.svg)](https://github.com/telegramdesktop/tdesktop/releases)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/Windows./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/MacOS./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
-[![Build Status](https://github.com/telegramdesktop/tdesktop/workflows/Linux./badge.svg)](https://github.com/telegramdesktop/tdesktop/actions)
+[![Build Status](https://github.com/zavolo/odesktop/workflows/Windows./badge.svg)](https://github.com/zavolo/odesktop/actions)
+[![Build Status](https://github.com/zavolo/odesktop/workflows/MacOS./badge.svg)](https://github.com/zavolo/odesktop/actions)
+[![Build Status](https://github.com/zavolo/odesktop/workflows/Linux./badge.svg)](https://github.com/zavolo/odesktop/actions)
 
 [![Preview of Telegram Desktop][preview_image]][preview_image_url]
 
