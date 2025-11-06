@@ -147,7 +147,7 @@ jobs:
           cmake --build build --parallel
           cmake --install build
 
-      - name: Telegram Desktop build.
+      - name: Opengram Desktop build.
         if: env.ONLY_CACHE == 'false'
         env:
           tg_owt_DIR: ${{ env.LibrariesPath }}/tg_owt/build

@@ -1933,7 +1933,7 @@ ClickHandlerPtr MakeUrlAreaHandler(
 		void onClick(ClickContext context) const override {
 			const auto raw = url();
 			const auto strong = _weak.get();
-			const auto prefix = u"tg://nft?slug="_q;
+			const auto prefix = u"otg://nft?slug="_q;
 			if (raw.startsWith(prefix) && strong) {
 				const auto slug = raw.mid(
 					prefix.size()

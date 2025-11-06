@@ -132,7 +132,7 @@ void SetCrashAnnotationsGL() {
 base::options::toggle OptionSkipUrlSchemeRegister({
 	.id = kOptionSkipUrlSchemeRegister,
 	.name = "Skip URL scheme register",
-	.description = "Don't re-register tg:// URL scheme on autoupdate.",
+	.description = "Don't re-register otg:// URL scheme on autoupdate.",
 });
 
 } // namespace
@@ -1106,7 +1106,7 @@ void Application::checkStartUrls() {
 }
 
 bool Application::openLocalUrl(const QString &url, QVariant context) {
-	return openCustomUrl("tg://", LocalUrlHandlers(), url, context);
+	return openCustomUrl("otg://", LocalUrlHandlers(), url, context);
 }
 
 bool Application::openInternalUrl(const QString &url, QVariant context) {
@@ -1832,9 +1832,9 @@ void Application::RegisterUrlScheme() {
 	base::Platform::RegisterUrlScheme(base::Platform::UrlSchemeDescriptor{
 		.executable = Platform::ExecutablePathForShortcuts(),
 		.arguments = arguments,
-		.protocol = u"tg"_q,
-		.protocolName = u"Telegram Link"_q,
-		.shortAppName = u"tdesktop"_q,
+		.protocol = u"otg"_q,
+		.protocolName = u"Opengram Link"_q,
+		.shortAppName = u"odesktop"_q,
 		.longAppName = QCoreApplication::applicationName(),
 		.displayAppName = AppName.utf16(),
 		.displayAppDescription = AppName.utf16(),
@@ -1845,7 +1845,7 @@ void Application::RegisterUrlScheme() {
 		.arguments = arguments,
 		.protocol = u"tonsite"_q,
 		.protocolName = u"TonSite Link"_q,
-		.shortAppName = u"tdesktop"_q,
+		.shortAppName = u"odesktop"_q,
 		.longAppName = QCoreApplication::applicationName(),
 		.displayAppName = AppName.utf16(),
 		.displayAppDescription = AppName.utf16(),

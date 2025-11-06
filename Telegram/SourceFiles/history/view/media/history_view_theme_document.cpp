@@ -664,7 +664,7 @@ rpl::producer<QString> GiftThemeBox::button() {
 
 ClickHandlerPtr GiftThemeBox::createViewLink() {
 	return std::make_shared<UrlClickHandler>(
-		u"tg://nft?slug="_q + _data.unique->slug);
+		u"otg://nft?slug="_q + _data.unique->slug);
 }
 
 int GiftThemeBox::buttonSkip() {

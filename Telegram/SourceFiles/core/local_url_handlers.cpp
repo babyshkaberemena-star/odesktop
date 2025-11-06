@@ -1838,7 +1838,7 @@ QString TryConvertUrlToLocal(QString url) {
 				+ name
 				+ subdomainMatch->captured(3)
 				+ subdomainMatch->captured(4));
-			return result.startsWith("tg://resolve?domain=")
+			return result.startsWith("otg://resolve?domain=")
 				? result
 				: url;
 		}
@@ -1848,21 +1848,21 @@ QString TryConvertUrlToLocal(QString url) {
 		const auto query = telegramMeMatch->capturedView(5);
 		if (const auto phoneMatch = regex_match(u"^\\+([0-9]+)(\\?|$)"_q, query, matchOptions)) {
 			const auto params = query.mid(phoneMatch->captured(0).size()).toString();
-			return u"tg://resolve?phone="_q + phoneMatch->captured(1) + (params.isEmpty() ? QString() : '&' + params);
+			return u"otg://resolve?phone="_q + phoneMatch->captured(1) + (params.isEmpty() ? QString() : '&' + params);
 		} else if (const auto joinChatMatch = regex_match(u"^(joinchat/|\\+|\\%20)([a-zA-Z0-9\\.\\_\\-]+)(\\?|$)"_q, query, matchOptions)) {
-			return u"tg://join?invite="_q + url_encode(joinChatMatch->captured(2));
+			return u"otg://join?invite="_q + url_encode(joinChatMatch->captured(2));
 		} else if (const auto joinFilterMatch = regex_match(u"^(addlist/)([a-zA-Z0-9\\.\\_\\-]+)(\\?|$)"_q, query, matchOptions)) {
-			return u"tg://addlist?slug="_q + url_encode(joinFilterMatch->captured(2));
+			return u"otg://addlist?slug="_q + url_encode(joinFilterMatch->captured(2));
 		} else if (const auto stickerSetMatch = regex_match(u"^(addstickers|addemoji)/([a-zA-Z0-9\\.\\_]+)(\\?|$)"_q, query, matchOptions)) {
-			return u"tg://"_q + stickerSetMatch->captured(1) + "?set=" + url_encode(stickerSetMatch->captured(2));
+			return u"otg://"_q + stickerSetMatch->captured(1) + "?set=" + url_encode(stickerSetMatch->captured(2));
 		} else if (const auto themeMatch = regex_match(u"^addtheme/([a-zA-Z0-9\\.\\_]+)(\\?|$)"_q, query, matchOptions)) {
-			return u"tg://addtheme?slug="_q + url_encode(themeMatch->captured(1));
+			return u"otg://addtheme?slug="_q + url_encode(themeMatch->captured(1));
 		} else if (const auto languageMatch = regex_match(u"^setlanguage/([a-zA-Z0-9\\.\\_\\-]+)(\\?|$)"_q, query, matchOptions)) {
-			return u"tg://setlanguage?lang="_q + url_encode(languageMatch->captured(1));
+			return u"otg://setlanguage?lang="_q + url_encode(languageMatch->captured(1));
 		} else if (const auto shareUrlMatch = regex_match(u"^share/url/?\\?(.+)$"_q, query, matchOptions)) {
-			return u"tg://msg_url?"_q + shareUrlMatch->captured(1);
+			return u"otg://msg_url?"_q + shareUrlMatch->captured(1);
 		} else if (const auto confirmPhoneMatch = regex_match(u"^confirmphone/?\\?(.+)"_q, query, matchOptions)) {
-			return u"tg://confirmphone?"_q + confirmPhoneMatch->captured(1);
+			return u"otg://confirmphone?"_q + confirmPhoneMatch->captured(1);
 		} else if (const auto ivMatch = regex_match(u"^iv/?\\?(.+)(#|$)"_q, query, matchOptions)) {
 			//
 			// We need to show our t.me page, not the url directly.
@@ -1875,11 +1875,11 @@ QString TryConvertUrlToLocal(QString url) {
 			//}
 			return url;
 		} else if (const auto socksMatch = regex_match(u"^socks/?\\?(.+)(#|$)"_q, query, matchOptions)) {
-			return u"tg://socks?"_q + socksMatch->captured(1);
+			return u"otg://socks?"_q + socksMatch->captured(1);
 		} else if (const auto proxyMatch = regex_match(u"^proxy/?\\?(.+)(#|$)"_q, query, matchOptions)) {
-			return u"tg://proxy?"_q + proxyMatch->captured(1);
+			return u"otg://proxy?"_q + proxyMatch->captured(1);
 		} else if (const auto invoiceMatch = regex_match(u"^(invoice/|\\$)([a-zA-Z0-9_\\-]+)(\\?|#|$)"_q, query, matchOptions)) {
-			return u"tg://invoice?slug="_q + invoiceMatch->captured(2);
+			return u"otg://invoice?slug="_q + invoiceMatch->captured(2);
 		} else if (const auto bgMatch = regex_match(u"^bg/([a-zA-Z0-9\\.\\_\\-\\~]+)(\\?(.+)?)?$"_q, query, matchOptions)) {
 			const auto params = bgMatch->captured(3);
 			const auto bg = bgMatch->captured(1);
@@ -1889,16 +1889,16 @@ QString TryConvertUrlToLocal(QString url) {
 					|| regex_match(u"^[a-fA-F0-9]{6}(\\~[a-fA-F0-9]{6}){1,3}$"_q, bg))
 				? "gradient"
 				: "slug";
-			return u"tg://bg?"_q + type + '=' + bg + (params.isEmpty() ? QString() : '&' + params);
+			return u"otg://bg?"_q + type + '=' + bg + (params.isEmpty() ? QString() : '&' + params);
 		} else if (const auto chatlinkMatch = regex_match(u"^m/([a-zA-Z0-9\\.\\_\\-]+)(\\?|$)"_q, query, matchOptions)) {
 			const auto slug = chatlinkMatch->captured(1);
-			return u"tg://message?slug="_q + slug;
+			return u"otg://message?slug="_q + slug;
 		} else if (const auto nftMatch = regex_match(u"^nft/([a-zA-Z0-9\\.\\_\\-]+)(\\?|$)"_q, query, matchOptions)) {
 			const auto slug = nftMatch->captured(1);
-			return u"tg://nft?slug="_q + slug;
+			return u"otg://nft?slug="_q + slug;
 		} else if (const auto callMatch = regex_match(u"^call/([a-zA-Z0-9\\.\\_\\-]+)(\\?|$)"_q, query, matchOptions)) {
 			const auto slug = callMatch->captured(1);
-			return u"tg://call?slug="_q + slug;
+			return u"otg://call?slug="_q + slug;
 		} else if (const auto privateMatch = regex_match(u"^"
 			"c/(\\-?\\d+)"
 			"("
@@ -1911,9 +1911,9 @@ QString TryConvertUrlToLocal(QString url) {
 			const auto params = query.mid(privateMatch->captured(0).size()).toString();
 			if (params.indexOf("boost", 0, Qt::CaseInsensitive) >= 0
 				&& params.toLower().split('&').contains(u"boost"_q)) {
-				return u"tg://boost?channel="_q + channel;
+				return u"otg://boost?channel="_q + channel;
 			}
-			const auto base = u"tg://privatepost?channel="_q + channel;
+			const auto base = u"otg://privatepost?channel="_q + channel;
 			auto added = QString();
 			if (const auto threadPostMatch = regex_match(u"^/(\\d+)/(\\d+)(/?\\?|/?$)"_q, privateMatch->captured(2))) {
 				added = u"&topic=%1&post=%2"_q.arg(threadPostMatch->captured(1), threadPostMatch->captured(2));
@@ -1937,15 +1937,15 @@ QString TryConvertUrlToLocal(QString url) {
 			const auto params = query.mid(usernameMatch->captured(0).size()).toString();
 			if (params.indexOf("boost", 0, Qt::CaseInsensitive) >= 0
 				&& params.toLower().split('&').contains(u"boost"_q)) {
-				return u"tg://boost?domain="_q + domain;
+				return u"otg://boost?domain="_q + domain;
 			} else if (domain == u"boost"_q) {
 				if (const auto domainMatch = regex_match(u"^/([a-zA-Z0-9\\.\\_]+)(/?\\?|/?$)"_q, usernameMatch->captured(2))) {
-					return u"tg://boost?domain="_q + domainMatch->captured(1);
+					return u"otg://boost?domain="_q + domainMatch->captured(1);
 				} else if (params.indexOf("c=", 0, Qt::CaseInsensitive) >= 0) {
-					return u"tg://boost?"_q + params;
+					return u"otg://boost?"_q + params;
 				}
 			}
-			const auto base = u"tg://resolve?domain="_q + url_encode(usernameMatch->captured(1));
+			const auto base = u"otg://resolve?domain="_q + url_encode(usernameMatch->captured(1));
 			auto added = QString();
 			if (const auto threadPostMatch = regex_match(u"^/(\\d+)/(\\d+)(/?\\?|/?$)"_q, usernameMatch->captured(2))) {
 				added = u"&topic=%1&post=%2"_q.arg(threadPostMatch->captured(1), threadPostMatch->captured(2));
@@ -1968,10 +1968,10 @@ QString TryConvertUrlToLocal(QString url) {
 
 bool InternalPassportLink(const QString &url) {
 	const auto urlTrimmed = url.trimmed();
-	if (!urlTrimmed.startsWith(u"tg://"_q, Qt::CaseInsensitive)) {
+	if (!urlTrimmed.startsWith(u"otg://"_q, Qt::CaseInsensitive)) {
 		return false;
 	}
-	const auto command = base::StringViewMid(urlTrimmed, u"tg://"_q.size());
+	const auto command = base::StringViewMid(urlTrimmed, u"otg://"_q.size());
 
 	using namespace qthelp;
 	const auto matchOptions = RegExOption::CaseInsensitive;

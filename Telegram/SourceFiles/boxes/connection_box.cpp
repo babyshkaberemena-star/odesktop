@@ -105,7 +105,7 @@ void AddProxyFromClipboard(
 		std::shared_ptr<Ui::Show> show) {
 	const auto proxyString = u"proxy"_q;
 	const auto socksString = u"socks"_q;
-	const auto protocol = u"tg://"_q;
+	const auto protocol = u"otg://"_q;
 
 	const auto maybeUrls = ExtractUrlsSimple(
 		QGuiApplication::clipboard()->text());

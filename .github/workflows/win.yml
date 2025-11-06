@@ -131,7 +131,7 @@ jobs:
       - name: Read configuration matrix.
         shell: bash
         run: |
-          ARTIFACT_NAME="Telegram"
+          ARTIFACT_NAME="Opengram"
 
           ARCH=""
           if [ -n "${{ matrix.arch }}" ]; then
@@ -178,7 +178,7 @@ jobs:
           del /S Libraries\*.pch
           del /S Libraries\*.obj
 
-      - name: Telegram Desktop build.
+      - name: Opengram Desktop build.
         if: env.ONLY_CACHE == 'false'
         run: |
           cd %TBUILD%\%REPO_NAME%\Telegram

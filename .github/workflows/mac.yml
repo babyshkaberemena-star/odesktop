@@ -99,7 +99,7 @@ jobs:
           cd Libraries
           find . -iname "*.dir" -exec rm -rf {} || true \;
 
-      - name: Telegram Desktop build.
+      - name: Opengram Desktop build.
         if: env.ONLY_CACHE == 'false'
         run: |
           cd $REPO_NAME/Telegram
@@ -108,9 +108,9 @@ jobs:
           if [ -n "${{ matrix.defines }}" ]; then
             DEFINE="-D ${{ matrix.defines }}=ON"
             echo Define from matrix: $DEFINE
-            echo "ARTIFACT_NAME=Telegram_${{ matrix.defines }}" >> $GITHUB_ENV
+            echo "ARTIFACT_NAME=Opengram_${{ matrix.defines }}" >> $GITHUB_ENV
           else
-            echo "ARTIFACT_NAME=Telegram" >> $GITHUB_ENV
+            echo "ARTIFACT_NAME=Opengram" >> $GITHUB_ENV
           fi
 
           ./configure.sh \
