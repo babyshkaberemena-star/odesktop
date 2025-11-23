@@ -1,0 +1,48 @@
+name: Build Telegram Desktop
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.6.0'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Configure CMake
+      run: |
+        mkdir build
+        cd build
+        cmake -G "NMake Makefiles" .. -DTDESKTOP_API_ID=${{ secrets.API_ID }} -DTDESKTOP_API_HASH=${{ secrets.API_HASH }} -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: |
+        cd build
+        nmake
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: TelegramDesktop-Windows
+        path: build/bin/Telegram.exe
