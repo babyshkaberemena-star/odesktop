@@ -40,7 +40,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -G "NMake Makefiles" .. -DTDESKTOP_API_ID=${{ secrets.API_ID }} -DTDESKTOP_API_HASH=${{ secrets.API_HASH }} -DCMAKE_BUILD_TYPE=Release
+        cmake -G "NMake Makefiles" .. -DTDESKTOP_API_ID=${{ secrets.API_ID }} -DTDESKTOP_API_HASH=${{ secrets.API_HASH }} -DCMAKE_BUILD_TYPE=Release -DDESKTOP_APP_USE_PACKAGED=OFF -Dada_DIR=../Telegram/ThirdParty/ada/cmake
 
     - name: Build
       run: |
